@@ -1,2 +1,2 @@
-# cold_conquest
+# ColdConquest
 3D Space Game
