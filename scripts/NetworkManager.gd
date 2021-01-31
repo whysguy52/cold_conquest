@@ -3,7 +3,7 @@ extends Node
 const PORT = 31400
 
 var playerList : Dictionary = {}
-var myPlayerData = {"userName": "", "role": ""}
+var myPlayerData = {"userName": "", "role": "","shipNum": null}
 
 signal server_initiated
 signal new_client_connected
@@ -23,8 +23,7 @@ func initiate_server(userName : String):
 	myPlayerData = {"userName": userName, "role": ""}
 	emit_signal("server_initiated", myPlayerData)
 	
-	
-	
+
 remote func player_connected(id, playerData):
 	playerList[id] = playerData
 	emit_signal("player_connected")
@@ -52,12 +51,13 @@ remote func new_client_connected(id, playerData):
 		player_connected(id, playerData)
 		rpc("player_connected",id, playerData)
 		print(playerData)
-		
+	
 
 func disconnect_player():
 	var id = get_tree().get_network_unique_id()
 	get_tree().network_peer = null
 	playerList.clear()
+	
 
 func _on_network_peer_disconnected(id):
 	print("about to disconnect the player")
@@ -68,6 +68,7 @@ func _on_network_peer_disconnected(id):
 remotesync func _load_game():
 	var nextScene = preload("res://scenes/Levels/TestLevel.tscn").instance()
 	Global.go_to_scene(nextScene)
+	
 
 func load_game():
 	rpc("_load_game")

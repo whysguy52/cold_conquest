@@ -13,8 +13,3 @@ func go_to_scene(nextScene : Node):
 	get_tree().get_root().add_child(currentScene)
 	get_tree().set_current_scene(currentScene)
 	
-
-func clear_children(childrenList: Node):
-	for playerInList in childrenList.get_children():
-		childrenList.remove_child(playerInList)
-		playerInList.queue_free()

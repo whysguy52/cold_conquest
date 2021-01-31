@@ -1,22 +1,54 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://fonts/Space_Mono/SpaceMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/Lobby/BackLabel.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Lobby/Lobby.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Lobby/ChangeNameBtn.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Lobby/PilotRoleBtn.gd" type="Script" id=5]
-[ext_resource path="res://scenes/Lobby/GunnerRoleBtn.gd" type="Script" id=6]
 [ext_resource path="res://scenes/Lobby/StartBtn.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Lobby/BattleshipLobbySlots.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Lobby/Battleship1.gd" type="Script" id=9]
+[ext_resource path="res://scenes/Lobby/Battleship2.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 19
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://scripts/label_hover.gd\"
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func _on_gui_input(event):
+	if event.is_pressed():
+		NetworkManager.myPlayerData[\"role\"] = \"gunner\"
+		NetworkManager.playerList[get_tree().get_network_unique_id()] = NetworkManager.myPlayerData
+		get_tree().get_root().get_node(\"LobbyMenu\").render_player_list()
+		print(NetworkManager.playerList)
+		rpc(\"update_other_lists\",NetworkManager.playerList)
+
+remote func update_other_lists(updatedList):
+	NetworkManager.playerList = updatedList
+	get_tree().get_root().get_node(\"LobbyMenu\").render_player_list()
+	print(NetworkManager.playerList)
+"
+
+[sub_resource type="DynamicFont" id=3]
 size = 42
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 42
 font_data = ExtResource( 1 )
 
@@ -54,24 +86,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PilotRoleBtn" type="Label" parent="."]
-anchor_left = 0.707
-anchor_top = 0.31
-anchor_right = 0.775
-anchor_bottom = 0.358
-margin_left = 0.0319824
-margin_right = 0.399841
-margin_bottom = 0.199997
-mouse_filter = 1
-custom_fonts/font = SubResource( 1 )
-text = "Pilot"
-align = 2
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="GunnerRoleBtn" type="Label" parent="."]
+visible = false
 anchor_left = 0.706
 anchor_top = 0.383
 anchor_right = 0.787
@@ -84,7 +100,7 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "Gunner"
 align = 2
-script = ExtResource( 6 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -113,8 +129,11 @@ margin_top = 23.0
 margin_right = 149.0
 margin_bottom = 87.0
 size_flags_horizontal = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Lobby"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BackLabel" type="Label" parent="."]
 margin_left = 12.0
@@ -124,48 +143,30 @@ margin_bottom = 587.0
 mouse_filter = 1
 size_flags_horizontal = 8
 size_flags_vertical = 8
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Back"
 script = ExtResource( 2 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="BattleshipSlots1" parent="." instance=ExtResource( 8 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 29.0
-margin_top = 93.0
-margin_right = -323.0
-margin_bottom = -76.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 230.0
+margin_top = 143.0
+margin_right = -361.0
+margin_bottom = -289.0
+script = ExtResource( 9 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 672.0
-margin_bottom = 431.0
-
-[node name="LobbySlots" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 672.0
-
-[node name="PlayerListContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LobbySlots"]
-custom_constants/separation = 1
-
-[node name="PlayerRoleList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LobbySlots"]
-margin_left = 4.0
-margin_right = 4.0
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 672.0
-margin_top = 431.0
-margin_right = 672.0
-margin_bottom = 431.0
-size_flags_horizontal = 8
-size_flags_vertical = 8
+[node name="BattleshipSlots2" parent="." instance=ExtResource( 8 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 230.0
+margin_top = 318.0
+margin_right = -352.0
+margin_bottom = -98.0
+script = ExtResource( 10 )
 [connection signal="gui_input" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_mouse_exited"]
-[connection signal="gui_input" from="PilotRoleBtn" to="PilotRoleBtn" method="_on_gui_input"]
-[connection signal="mouse_entered" from="PilotRoleBtn" to="PilotRoleBtn" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="PilotRoleBtn" to="PilotRoleBtn" method="_on_mouse_exited"]
 [connection signal="gui_input" from="GunnerRoleBtn" to="GunnerRoleBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="GunnerRoleBtn" to="GunnerRoleBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="GunnerRoleBtn" to="GunnerRoleBtn" method="_on_mouse_exited"]
