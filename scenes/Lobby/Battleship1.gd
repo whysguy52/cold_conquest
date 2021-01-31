@@ -18,5 +18,4 @@ func assign_ship_number():
 
 remote func update_other_lists(updatedList):
 	NetworkManager.playerList = updatedList
-	#get_tree().get_root().get_node("LobbyMenu").render_player_list()
 	print(NetworkManager.playerList)
