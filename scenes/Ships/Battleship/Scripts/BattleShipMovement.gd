@@ -1,5 +1,5 @@
 extends KinematicBody
-
+#Translate this node and rotate the child node "ShipBody"
 
 var shipPosition
 var role
@@ -18,3 +18,7 @@ func _physics_process(delta):
 
 func move_ship_forward(delta):
 	move_and_slide(shipPosition.transform.basis.x.normalized() * maxSpeed)
+	rpc("remote_move_ship", transform)
+
+remote func remote_move_ship(transform):
+	self.transform = transform

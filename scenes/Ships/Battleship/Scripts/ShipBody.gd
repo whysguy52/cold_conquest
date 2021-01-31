@@ -1,5 +1,5 @@
 extends Spatial
-
+# This is the rotation node. Translate the parent node and rotate this one. 
 var cameraNod
 var pilot
 
@@ -26,7 +26,7 @@ func turn_ship(isUpdating, orientationLocked):
 		quat_turn(isUpdating)
 	else:
 		vect_turn(isUpdating)
-	rpc("RemoteTurnShip",transform)
+	rpc("remote_turn_ship",transform)
 
 remote func remote_turn_ship(shipTransform):
 	transform = shipTransform
