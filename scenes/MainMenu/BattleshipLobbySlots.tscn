@@ -1,0 +1,32 @@
+[gd_scene format=2]
+
+[node name="BattleshipSlots" type="Control"]
+anchor_right = 0.283
+anchor_bottom = 0.108
+margin_right = 0.207977
+margin_bottom = 0.199997
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipTypeBattleShip" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Battleship"
+
+[node name="PilotSlot" type="Label" parent="."]
+margin_left = 66.0034
+margin_top = 22.2236
+margin_right = 106.003
+margin_bottom = 36.2236
+text = "Pilot:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 48.4251
+margin_top = 41.2273
+margin_right = 99.4251
+margin_bottom = 55.2273
+text = "Gunner:"
