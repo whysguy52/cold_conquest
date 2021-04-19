@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Ships/Battleship/Material.material" type="Material" id=1]
 [ext_resource path="res://scenes/Ships/Battleship/Scripts/GunnerControls.gd" type="Script" id=2]
@@ -27,6 +27,33 @@ surfaces/0 = {
 }
 
 [sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.92549, 0.65098, 0, 1 )
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.933333, 0.65098, 0, 1 )
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0, 0, 1 )
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 0, 0, 1 )
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 1, 1, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="BattleShip2" type="KinematicBody"]
 script = ExtResource( 3 )
@@ -83,7 +110,6 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="PilotHud" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -136,7 +162,49 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ThrusterSlider" type="VSlider" parent="PilotHud/Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = -87.0
+margin_right = 38.0
+margin_bottom = -11.0
+focus_mode = 0
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 5 )
+min_value = -10.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="WarpSlider" type="VSlider" parent="PilotHud/Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = -87.0
+margin_right = 64.0
+margin_bottom = -27.0
+focus_mode = 0
+custom_styles/grabber_area_highlight = SubResource( 6 )
+custom_styles/grabber_area = SubResource( 7 )
+max_value = 4.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="WarpBtn" type="Panel" parent="PilotHud/Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 51.0
+margin_top = -24.0
+margin_right = 64.0
+margin_bottom = -12.0
+custom_styles/panel = SubResource( 8 )
+[connection signal="mouse_entered" from="PilotHud/Panel" to="PilotControls" method="_on_pilot_hud_mouse_entered"]
+[connection signal="mouse_exited" from="PilotHud/Panel" to="PilotControls" method="_on_pilot_hud_mouse_exited"]
 [connection signal="toggled" from="PilotHud/Panel/CheckButton" to="PilotControls" method="_on_CheckButton_toggled"]
+[connection signal="mouse_entered" from="PilotHud/Panel/ThrusterSlider" to="PilotControls" method="_on_pilot_hud_mouse_entered"]
+[connection signal="mouse_exited" from="PilotHud/Panel/ThrusterSlider" to="PilotControls" method="_on_pilot_hud_mouse_exited"]
+[connection signal="value_changed" from="PilotHud/Panel/ThrusterSlider" to="." method="_on_ThrusterSlider_value_changed"]
 
 [editable path="ShipBody/GunController/Gun"]
 

@@ -43,10 +43,8 @@ size = 25
 font_data = ExtResource( 1 )
 
 [node name="BattleshipSlots" type="Control"]
-anchor_right = 0.432
-anchor_bottom = 0.307
-margin_right = -0.368011
-margin_bottom = -0.200012
+margin_right = 442.0
+margin_bottom = 184.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -92,10 +90,12 @@ __meta__ = {
 }
 
 [node name="PilotSelectBtn" type="Label" parent="PilotSelection"]
+anchor_top = 0.039
+anchor_bottom = 0.039
 margin_left = 244.0
-margin_top = 1.62541
+margin_top = -0.0125901
 margin_right = 334.0
-margin_bottom = 39.6254
+margin_bottom = 37.9874
 mouse_filter = 1
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 6 )
@@ -127,9 +127,9 @@ __meta__ = {
 
 [node name="GunnerSlot" type="Label" parent="GunnerSelection"]
 margin_left = 108.536
-margin_top = 1.14886
+margin_top = 1.94256
 margin_right = 258.536
-margin_bottom = 39.1489
+margin_bottom = 39.9426
 custom_styles/normal = SubResource( 8 )
 custom_fonts/font = SubResource( 9 )
 __meta__ = {
@@ -150,4 +150,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="gui_input" from="PilotSelection/PilotSelectBtn" to="PilotSelection/PilotSelectBtn" method="_on_gui_input"]
+[connection signal="mouse_entered" from="PilotSelection/PilotSelectBtn" to="PilotSelection/PilotSelectBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PilotSelection/PilotSelectBtn" to="PilotSelection/PilotSelectBtn" method="_on_mouse_exited"]
 [connection signal="gui_input" from="GunnerSelection/GunnerSelectBtn" to="GunnerSelection/GunnerSelectBtn" method="_on_gui_input"]
+[connection signal="mouse_entered" from="GunnerSelection/GunnerSelectBtn" to="GunnerSelection/GunnerSelectBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GunnerSelection/GunnerSelectBtn" to="GunnerSelection/GunnerSelectBtn" method="_on_mouse_exited"]

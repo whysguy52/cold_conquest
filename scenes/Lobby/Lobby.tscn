@@ -106,12 +106,12 @@ __meta__ = {
 }
 
 [node name="StartBtn" type="Label" parent="."]
-anchor_left = 0.913
-anchor_top = 0.923
+anchor_left = 0.999
+anchor_top = 0.998
 anchor_right = 0.999
 anchor_bottom = 0.998
-margin_left = 0.0879517
-margin_top = 0.199951
+margin_left = -87.9761
+margin_top = -44.8
 margin_right = 0.0239258
 margin_bottom = 0.200012
 mouse_filter = 1
@@ -136,10 +136,12 @@ __meta__ = {
 }
 
 [node name="BackLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
-margin_top = 523.0
+margin_top = -77.0
 margin_right = 116.0
-margin_bottom = 587.0
+margin_bottom = -13.0
 mouse_filter = 1
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -148,21 +150,25 @@ text = "Back"
 script = ExtResource( 2 )
 
 [node name="BattleshipSlots1" parent="." instance=ExtResource( 8 )]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 230.0
-margin_top = 143.0
-margin_right = -361.0
-margin_bottom = -289.0
+anchor_left = 0.225
+anchor_top = 0.238
+anchor_right = 0.225
+anchor_bottom = 0.238
+margin_left = -0.400009
+margin_top = 0.199997
+margin_right = 432.6
+margin_bottom = 168.2
 script = ExtResource( 9 )
 
 [node name="BattleshipSlots2" parent="." instance=ExtResource( 8 )]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 230.0
-margin_top = 318.0
-margin_right = -352.0
-margin_bottom = -98.0
+anchor_left = 0.225
+anchor_top = 0.5
+anchor_right = 0.225
+anchor_bottom = 0.5
+margin_left = -0.400009
+margin_top = 18.0
+margin_right = 441.6
+margin_bottom = 202.0
 script = ExtResource( 10 )
 [connection signal="gui_input" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_mouse_entered"]
