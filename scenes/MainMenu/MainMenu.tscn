@@ -23,9 +23,6 @@ margin_left = 100.0
 margin_top = 100.0
 margin_right = -100.0
 margin_bottom = -100.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 824.0
@@ -59,6 +56,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="gui_input" from="VBoxContainer/PlayBtn" to="VBoxContainer/PlayBtn" method="_on_Label_gui_input"]
 [connection signal="mouse_entered" from="VBoxContainer/PlayBtn" to="VBoxContainer/PlayBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/PlayBtn" to="VBoxContainer/PlayBtn" method="_on_mouse_exited"]

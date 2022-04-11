@@ -149,6 +149,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="gui_input" from="PilotSelection/PilotSelectBtn" to="PilotSelection/PilotSelectBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="PilotSelection/PilotSelectBtn" to="PilotSelection/PilotSelectBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PilotSelection/PilotSelectBtn" to="PilotSelection/PilotSelectBtn" method="_on_mouse_exited"]

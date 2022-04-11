@@ -170,6 +170,7 @@ margin_top = 18.0
 margin_right = 441.6
 margin_bottom = 202.0
 script = ExtResource( 10 )
+
 [connection signal="gui_input" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ChangeNameBtn" to="ChangeNameBtn" method="_on_mouse_exited"]
