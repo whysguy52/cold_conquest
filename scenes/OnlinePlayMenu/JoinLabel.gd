@@ -1,6 +1,7 @@
 extends "res://scripts/label_hover.gd"
 
 func _ready():
+# warning-ignore:return_value_discarded
   NetworkManager.connect("new_client_connected", self, "_on_new_client_connected")
 
 func _on_JoinBtn_gui_input(event):

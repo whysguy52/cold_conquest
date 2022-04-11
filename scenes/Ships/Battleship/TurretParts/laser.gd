@@ -9,6 +9,7 @@ var timer = 0
 var hit_something = false
 
 func _ready():
+# warning-ignore:return_value_discarded
     $Area.connect("body_entered", self, "collided")
 
 

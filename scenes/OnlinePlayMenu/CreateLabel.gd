@@ -3,6 +3,7 @@ extends "res://scripts/label_hover.gd"
 onready var userNameInput = get_parent().get_node("GridContainer2/UserNameInput")
 
 func _ready():
+# warning-ignore:return_value_discarded
   NetworkManager.connect("server_initiated", self, "_on_server_initiated_confirm")
 
 func _on_CreateBtn_gui_input(event):

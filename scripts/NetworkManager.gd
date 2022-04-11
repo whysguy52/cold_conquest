@@ -12,7 +12,9 @@ signal player_disconnected
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+# warning-ignore:return_value_discarded
     get_tree().connect("connected_to_server", self, "_on_client_connected")
+# warning-ignore:return_value_discarded
     get_tree().connect("network_peer_disconnected", self, "_on_network_peer_disconnected")
 
 
@@ -27,8 +29,6 @@ func initiate_server(userName : String):
 remote func player_connected(id, playerData):
     playerList[id] = playerData
     emit_signal("player_connected")
-    
-    
 
 func join_server(ipAddress, userName):
     var peer = NetworkedMultiplayerENet.new()
@@ -54,6 +54,7 @@ remote func new_client_connected(id, playerData):
     
 
 func disconnect_player():
+# warning-ignore:unused_variable
     var id = get_tree().get_network_unique_id()
     get_tree().network_peer = null
     playerList.clear()
@@ -61,6 +62,7 @@ func disconnect_player():
 
 func _on_network_peer_disconnected(id):
     print("about to disconnect the player")
+# warning-ignore:return_value_discarded
     playerList.erase(id)
     emit_signal("player_disconnected")
     
