@@ -4,31 +4,17 @@ var MOUSE_SENSITIVITY = 0.05
 
 var CameraOrbit
 var CameraNod
-var rotVect:Vector3
-
-var gunController #to be moved to the gunner dedicated class
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     CameraOrbit = $CameraOrbit
     CameraNod = $CameraOrbit/CameraNod
     
-    gunController = get_parent().get_node("GunController")
-    
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #    pass
-
-func _physics_process(delta):
-    #temporary code - to be moved into the gunnar dedicated class
-    rotVect.y = CameraOrbit.y
-    rotVect.x = CameraNod.x
-    
-    gunController.set_new_angle(rotVect)
-    gunController.turn_turrets(delta)
 
 func _input(event):
   if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

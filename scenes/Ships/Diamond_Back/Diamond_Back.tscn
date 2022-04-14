@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/Ships/Diamond_Back/Cannon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Ships/Diamond_Back/GunController.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Ships/Diamond_Back/GunnerControls.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Ships/Diamond_Back/StationController.gd" type="Script" id=3]
 
 [sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
@@ -28,17 +28,17 @@ points = PoolVector3Array( -2.05302, -0.59339, -9.58448, -1.57955, 0.945368, 10.
 
 [node name="Diamond_Back" type="KinematicBody"]
 
-[node name="GunnerControls" type="Spatial" parent="."]
+[node name="StationController" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
-[node name="CameraOrbit" type="Spatial" parent="GunnerControls"]
+[node name="CameraOrbit" type="Spatial" parent="StationController"]
 
-[node name="CameraNod" type="Spatial" parent="GunnerControls/CameraOrbit"]
+[node name="CameraNod" type="Spatial" parent="StationController/CameraOrbit"]
 
-[node name="Camera" type="Camera" parent="GunnerControls/CameraOrbit/CameraNod"]
+[node name="Camera" type="Camera" parent="StationController/CameraOrbit/CameraNod"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.5598 )
 
-[node name="RayCast" type="RayCast" parent="GunnerControls/CameraOrbit/CameraNod/Camera"]
+[node name="RayCast" type="RayCast" parent="StationController/CameraOrbit/CameraNod/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0376825, -0.855051 )
 cast_to = Vector3( 0, 0, -100 )
 
@@ -98,3 +98,5 @@ transform = Transform( 0.89361, -0.446405, -0.046737, 0.447759, 0.893841, 0.0236
 transform = Transform( 0.89361, -0.446579, -0.0450428, 0.447759, 0.893924, 0.020286, 0.0312055, -0.0382961, 0.998779, -1.4277, 0.49201, -2.6906 )
 
 [node name="Base" parent="GunController/Cannon1" instance=ExtResource( 1 )]
+
+[editable path="GunController/Cannon8/Base"]
