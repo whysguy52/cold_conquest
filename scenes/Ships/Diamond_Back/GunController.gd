@@ -10,12 +10,12 @@ func _ready():
     Cannons = get_children()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
     pass
 
-#  $Sprite.position = $A.position.linear_interpolate($B.position, t)
 
 func set_new_angle(camAngle:Quat):
+    
     for cannon in Cannons:
         cannon = cannon.get_child(0)
         cannon.set_new_angle(camAngle)
