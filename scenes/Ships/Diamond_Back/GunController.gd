@@ -2,7 +2,6 @@ extends Spatial
 
 
 var Cannons
-var t = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,5 +16,19 @@ func _process(_delta):
 func set_new_angle(camAngle:Quat):
     
     for cannon in Cannons:
-        cannon = cannon.get_child(0)
-        cannon.set_new_angle(camAngle)
+        if cannon.translation.y < 0:
+            cannon = cannon.get_child(0)
+            var flippedQuat = flip_quat(camAngle)
+            cannon.set_new_angle(flippedQuat)
+        else:
+            cannon = cannon.get_child(0)
+            cannon.set_new_angle(camAngle)
+
+#needs to be fixed
+func flip_quat(camAngle):
+    var wValue = camAngle.w
+    var zValue = camAngle.z
+    
+    camAngle.w = zValue
+    camAngle.z = wValue
+    return camAngle
