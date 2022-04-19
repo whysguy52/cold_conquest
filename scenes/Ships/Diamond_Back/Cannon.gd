@@ -2,10 +2,10 @@ extends Spatial
 
 
 var PivotPoint
-var targetRot:Quat
-var updatedRot:Quat
-var currentBaseRot:Quat
-var currentPivotRot:Quat
+var targetRot:Basis
+var updatedRot:Basis
+var currentBaseRot:Basis
+var currentPivotRot:Basis
 var weight = 0.0
 
 # Called when the node enters the scene tree for the first time.
@@ -18,19 +18,19 @@ func _process(_delta):
     pass
 
 func _physics_process(delta):
-    if updatedRot.w != targetRot.w:
+    if updatedRot.z != targetRot.z:
         weight = delta
         targetRot = updatedRot
         
     if weight <= 1.0:
         turnTurrets(delta)
 
-func set_new_angle(camAngle:Quat):
-    if camAngle == updatedRot:
+func set_new_angle(camAngle:Basis):
+    if camAngle.z == updatedRot.z:
         return
     updatedRot = camAngle
-    currentBaseRot = global_transform.basis.get_rotation_quat().normalized()
-    currentPivotRot = PivotPoint.global_transform.basis.get_rotation_quat().normalized()
+    currentBaseRot = global_transform.basis.orthonormalized()
+    currentPivotRot = PivotPoint.global_transform.basis.orthonormalized()
 
 func turnTurrets(delta):
     turnBase()
@@ -39,10 +39,10 @@ func turnTurrets(delta):
 
 func turnBase():
     #calculate weighted slerp for base and store it
-    var nextBaseRot = currentBaseRot.slerp(targetRot,weight)
+    var nextBaseRot = currentBaseRot.slerp(targetRot.orthonormalized(),weight)
     
     #assign the next weighted basis to current basis
-    self.global_transform.basis = Basis(nextBaseRot)
+    global_transform.basis = nextBaseRot
     
     #lock base rotation to only y.
 #    self.rotation_degrees.x = 0
@@ -50,12 +50,12 @@ func turnBase():
 
 func turnPivot():
     
-    var nextPivotRot = currentPivotRot.slerp(targetRot,weight)
+    var nextPivotRot = currentPivotRot.slerp(targetRot.orthonormalized(),weight)
     
-    PivotPoint.global_transform.basis = Basis(nextPivotRot)
+    PivotPoint.global_transform.basis = nextPivotRot
     
     #lock pivot rotation to only x
-    PivotPoint.rotation_degrees.z = 0
-    PivotPoint.rotation_degrees.y = 0
-    
-    PivotPoint.rotation_degrees.x = clamp(PivotPoint.rotation_degrees.x,0,90)
+#    PivotPoint.rotation_degrees.z = 0
+#    PivotPoint.rotation_degrees.y = 0
+#
+#    PivotPoint.rotation_degrees.x = clamp(PivotPoint.rotation_degrees.x,0,90)

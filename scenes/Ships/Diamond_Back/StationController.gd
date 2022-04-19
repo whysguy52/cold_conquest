@@ -1,7 +1,7 @@
 extends "res://scenes/Ships/BaseController.gd"
 
 
-var cameraRotVect:Quat
+var cameraRotVect:Basis
 var gunController
 
 # Called when the node enters the scene tree for the first time.
@@ -11,7 +11,7 @@ func _ready():
 
 func _physics_process(_delta):
     if Input.is_action_pressed("RMB"):
-        cameraRotVect = $CameraOrbit/CameraNod.global_transform.basis.get_rotation_quat()
+        cameraRotVect = $CameraOrbit/CameraNod.global_transform.basis
         gunController.set_new_angle(cameraRotVect)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

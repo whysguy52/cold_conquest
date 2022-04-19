@@ -13,22 +13,20 @@ func _process(_delta):
     pass
 
 
-func set_new_angle(camAngle:Quat):
+func set_new_angle(camAngle:Basis):
     
     for cannon in Cannons:
         if cannon.translation.y < 0:
+            var flippedBasis = flip_quat(camAngle)
             cannon = cannon.get_child(0)
-            var flippedQuat = flip_quat(camAngle)
-            cannon.set_new_angle(flippedQuat)
+            cannon.set_new_angle(flippedBasis)
         else:
             cannon = cannon.get_child(0)
             cannon.set_new_angle(camAngle)
 
 #needs to be fixed
 func flip_quat(camAngle):
-    var wValue = camAngle.w
-    var zValue = camAngle.z
-    
-    camAngle.w = zValue
-    camAngle.z = wValue
-    return camAngle
+    var convertedBasis:Basis
+    convertedBasis = convertedBasis.rotated(camAngle.z,PI)
+#    var newQuat = Quat(convertedBasis)
+    return convertedBasis
