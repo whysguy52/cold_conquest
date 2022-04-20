@@ -11,8 +11,6 @@ var weight = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
     PivotPoint = $Body/PivotPoint
-#    currentBaseRot = transform.basis.get_rotation_quat()
-#    currentPivotRot = PivotPoint.transform.basis.get_rotation_quat()
 
 func _process(_delta):
     pass
@@ -26,6 +24,9 @@ func _physics_process(delta):
         turnTurrets(delta)
 
 func set_new_angle(camAngle:Basis):
+#this will prevent the turrets from moving super fast when the angle doesn't change.
+#I believe it has something to do with the weight getting stuck at something small
+#and the new slerp start point "0" gets pulled up quickly
     if camAngle.z == updatedRot.z:
         return
     updatedRot = camAngle

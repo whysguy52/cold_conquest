@@ -14,19 +14,16 @@ func _process(_delta):
 
 
 func set_new_angle(camAngle:Basis):
-    
+    #rotate the axis by the cannons z axis angle and send it.
+    # I don't know if this way is a good idea but it works.
     for cannon in Cannons:
-        if cannon.translation.y < 0:
-            var flippedBasis = flip_quat(camAngle)
-            cannon = cannon.get_child(0)
-            cannon.set_new_angle(flippedBasis)
-        else:
-            cannon = cannon.get_child(0)
-            cannon.set_new_angle(camAngle)
+      #CAUTION: rotation_degrees.z may cause issues
+      var flippedBasis = rotate_basis_axis(camAngle,cannon.rotation_degrees.z)
+      cannon = cannon.get_child(0)
+      cannon.set_new_angle(flippedBasis)
 
 #needs to be fixed
-func flip_quat(camAngle):
+func rotate_basis_axis(camAngle,baseRot):
     var convertedBasis:Basis
-    convertedBasis = camAngle.rotated(camAngle.z,PI)
-#    var newQuat = Quat(convertedBasis)
+    convertedBasis = camAngle.rotated(camAngle.z,baseRot)
     return convertedBasis
