@@ -45,8 +45,8 @@ func turnBase():
     global_transform.basis = nextBaseRot
     
     #lock base rotation to only y.
-#    self.rotation_degrees.x = 0
-#    self.rotation_degrees.z = 0
+    self.rotation_degrees.x = 0
+    self.rotation_degrees.z = 0
 
 func turnPivot():
     
@@ -55,7 +55,7 @@ func turnPivot():
     PivotPoint.global_transform.basis = nextPivotRot
     
     #lock pivot rotation to only x
-#    PivotPoint.rotation_degrees.z = 0
-#    PivotPoint.rotation_degrees.y = 0
-#
-#    PivotPoint.rotation_degrees.x = clamp(PivotPoint.rotation_degrees.x,0,90)
+    PivotPoint.rotation_degrees.z = 0
+    PivotPoint.rotation_degrees.y = 0
+
+    PivotPoint.rotation_degrees.x = clamp(PivotPoint.rotation_degrees.x,0,90)

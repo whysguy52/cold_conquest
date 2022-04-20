@@ -27,6 +27,6 @@ func set_new_angle(camAngle:Basis):
 #needs to be fixed
 func flip_quat(camAngle):
     var convertedBasis:Basis
-    convertedBasis = convertedBasis.rotated(camAngle.z,PI)
+    convertedBasis = camAngle.rotated(camAngle.z,PI)
 #    var newQuat = Quat(convertedBasis)
     return convertedBasis
