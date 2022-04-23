@@ -21,3 +21,7 @@ func _on_gui_input(event):
     NetworkManager.playerList[get_tree().get_network_unique_id()] = NetworkManager.myPlayerData
     get_parent().get_node("PilotSlot").text = NetworkManager.myPlayerData["userName"]
     get_parent().get_parent().assign_ship_number()
+    rpc("update_pilot_text",NetworkManager.myPlayerData["userName"])
+
+remote func update_pilot_text(userName):
+    get_parent().get_node("PilotSlot").text = userName

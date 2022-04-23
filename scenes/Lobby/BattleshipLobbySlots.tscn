@@ -12,35 +12,35 @@ font_data = ExtResource( 1 )
 size = 25
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 25
+font_data = ExtResource( 1 )
+
 [sub_resource type="StyleBoxFlat" id=3]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 25
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 0.54902, 0.54902, 1 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 25
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=7]
 size = 25
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=8]
 
 [sub_resource type="DynamicFont" id=9]
 size = 25
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0, 0.54902, 0.54902, 1 )
+[sub_resource type="StyleBoxFlat" id=8]
 
 [sub_resource type="DynamicFont" id=11]
 size = 25
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0.54902, 0.54902, 1 )
 
 [node name="BattleshipSlots" type="Control"]
 margin_right = 442.0
@@ -83,8 +83,8 @@ margin_left = 90.9196
 margin_top = 2.08655
 margin_right = 240.92
 margin_bottom = 40.0865
-custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -97,8 +97,8 @@ margin_top = -0.0125901
 margin_right = 334.0
 margin_bottom = 37.9874
 mouse_filter = 1
-custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
 text = "Select"
 script = ExtResource( 2 )
 __meta__ = {
@@ -130,8 +130,8 @@ margin_left = 108.536
 margin_top = 1.94256
 margin_right = 258.536
 margin_bottom = 39.9426
-custom_styles/normal = SubResource( 8 )
 custom_fonts/font = SubResource( 9 )
+custom_styles/normal = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -142,8 +142,8 @@ margin_top = 0.264297
 margin_right = 351.763
 margin_bottom = 38.2643
 mouse_filter = 1
-custom_styles/normal = SubResource( 10 )
 custom_fonts/font = SubResource( 11 )
+custom_styles/normal = SubResource( 10 )
 text = "Select"
 script = ExtResource( 3 )
 __meta__ = {
