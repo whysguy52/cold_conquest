@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Ships/Diamond_Back/Cannon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Ships/Diamond_Back/GunController.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Ships/Diamond_Back/StationController.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Ships/ShipCoreScripts/GunController.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Ships/ShipCoreScripts/Ship_Root_Script.gd" type="Script" id=4]
 
 [sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
@@ -28,9 +28,9 @@ points = PoolVector3Array( -2.05302, -0.59339, -9.58448, -1.57955, 0.945368, 10.
 
 [node name="Diamond_Back" type="KinematicBody"]
 transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 4 )
 
 [node name="StationController" type="Spatial" parent="."]
-script = ExtResource( 3 )
 
 [node name="CameraOrbit" type="Spatial" parent="StationController"]
 
@@ -100,3 +100,5 @@ transform = Transform( 0.89361, -0.446405, -0.046737, 0.447759, 0.893841, 0.0236
 transform = Transform( 0.89361, -0.446579, -0.0450428, 0.447759, 0.893924, 0.020286, 0.0312055, -0.0382961, 0.998779, -1.4277, 0.49201, -2.6906 )
 
 [node name="Base" parent="GunController/Cannon1" instance=ExtResource( 1 )]
+
+[connection signal="tree_entered" from="StationController" to="." method="_on_StationController_tree_entered"]

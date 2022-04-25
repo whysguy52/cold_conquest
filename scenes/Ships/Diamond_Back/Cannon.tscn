@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/Ships/Diamond_Back/Cannon.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Ships/ShipCoreScripts/Cannon.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Ships/Diamond_Back/CannonBody.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://scenes/Ships/Diamond_Back/CannonBarrel.tres" type="ArrayMesh" id=3]
 [ext_resource path="res://scenes/Ships/Battleship/Scripts/LaserSpawn.gd" type="Script" id=4]

@@ -22,6 +22,7 @@ func _physics_process(delta):
         
     if weight <= 1.0:
         turnTurrets(delta)
+        rpc("move_cannon_to",global_transform.basis,PivotPoint.global_transform.basis)
 
 func set_new_angle(camAngle:Basis):
 #this will prevent the turrets from moving super fast when the angle doesn't change.
@@ -60,3 +61,7 @@ func turnPivot():
     PivotPoint.rotation_degrees.y = 0
 
     PivotPoint.rotation_degrees.x = clamp(PivotPoint.rotation_degrees.x,0,90)
+
+remote func move_cannon_to(newBase:Basis,newPivot:Basis):
+    global_transform.basis = newBase.orthonormalized()
+    PivotPoint.global_transform.basis = newPivot.orthonormalized()
