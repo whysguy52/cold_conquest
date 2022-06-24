@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Ships/Diamond_Back/Cannon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Ships/ShipCoreScripts/GunController.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Ships/ShipCoreScripts/StationController_Pilot.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Ships/ShipCoreScripts/Ship_Root_Script.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Ships/Diamond_Back/ShipRotator.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Ships/ShipCoreScripts/ShipRotator.gd" type="Script" id=5]
 
 [sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
@@ -28,12 +27,73 @@ points = PoolVector3Array( -1.46072, 0.116966, -10.0592, 1.49813, 1.06355, 10.06
 [sub_resource type="ConvexPolygonShape" id=5]
 points = PoolVector3Array( -2.05302, -0.59339, -9.58448, -1.57955, 0.945368, 10.0617, -1.57955, 0.234872, 10.0617, -4.30152, -0.356559, 10.0617, -1.81642, -0.00147302, -9.58448, -1.57955, -0.356559, 7.81224, -0.99964, 0.623167, -1.17756, -3.47289, -0.711806, 10.0617, -1.57955, -0.474812, -10.0572, -1.81642, 0.826952, 7.93042, -2.28988, -0.238305, -9.58448, -4.30152, -0.59339, 9.47075, -0.992052, 0.794215, 2.37104, -1.81642, -0.59339, -9.34614, -4.30152, -0.356559, 9.3506, -3.82805, -0.711806, 7.45571, -1.57955, -0.00147302, -10.0572, -2.28988, -0.474812, -9.58448, -3.35458, -0.711806, 9.1162, -1.69812, 0.589958, 1.65681, -3.94635, -0.238305, 7.93042, -4.06465, -0.711806, 10.0617, -2.17132, -0.474812, -10.0572, -1.57955, 0.945368, 9.23242, -3.82805, -0.119889, 9.23242, -2.17132, -0.238305, -10.0572, -1.57955, -0.474812, -9.34614, -2.76308, -0.238305, -4.61286, -1.69812, 0.471866, -0.825059, -1.81642, -0.59339, -9.70266, -4.30152, -0.59339, 10.0617, -2.40818, -0.59339, -6.62593, -2.40818, -0.356559, -8.51885 )
 
-[node name="Diamond_Back" type="KinematicBody"]
-transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
+[node name="Diamond_Back" type="Spatial"]
 script = ExtResource( 4 )
 
+[node name="ShipBody" type="KinematicBody" parent="."]
+transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="ShipBody" type="MeshInstance" parent="ShipBody"]
+transform = Transform( 1, -2.38419e-07, 0, 2.38419e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="RightCollision" type="CollisionShape" parent="ShipBody"]
+shape = SubResource( 3 )
+
+[node name="MiddleCollision" type="CollisionShape" parent="ShipBody"]
+shape = SubResource( 4 )
+
+[node name="LeftCollision" type="CollisionShape" parent="ShipBody"]
+shape = SubResource( 5 )
+
+[node name="GunController" type="Spatial" parent="ShipBody"]
+script = ExtResource( 2 )
+
+[node name="Cannon8" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( -0.89395, 0.447813, 0.0178096, -0.448071, -0.893874, -0.0148961, 0.00924885, -0.0212963, 0.99973, 1.0231, -0.703036, 5.30369 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon8" instance=ExtResource( 1 )]
+
+[node name="Cannon7" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( -0.894294, -0.447126, -0.0177981, 0.447385, -0.894218, -0.0149018, -0.00925241, -0.0212892, 0.999731, -1.02301, -0.703081, 5.30369 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon7" instance=ExtResource( 1 )]
+
+[node name="Cannon6" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( -0.89395, 0.447813, 0.0178096, -0.448071, -0.893874, -0.0148961, 0.00924885, -0.0212963, 0.99973, 0.880628, -0.583867, -2.69415 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon6" instance=ExtResource( 1 )]
+
+[node name="Cannon5" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( -0.894294, -0.447126, -0.0177981, 0.447385, -0.894218, -0.0149018, -0.00925241, -0.0212892, 0.999731, -0.880628, -0.583867, -2.69415 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon5" instance=ExtResource( 1 )]
+
+[node name="Cannon4" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( 0.893362, 0.446903, 0.0467179, -0.448254, 0.893595, 0.0236069, -0.0311969, -0.0420309, 0.998629, 1.79459, 0.670486, 5.29933 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon4" instance=ExtResource( 1 )]
+
+[node name="Cannon2" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( 0.893361, 0.447077, 0.0450365, -0.448255, 0.893676, 0.0202452, -0.0311969, -0.0382742, 0.99878, 1.42074, 0.481455, -2.6902 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon2" instance=ExtResource( 1 )]
+
+[node name="Cannon3" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( 0.89361, -0.446405, -0.046737, 0.447759, 0.893841, 0.0236778, 0.0312055, -0.0420857, 0.998627, -1.7968, 0.671788, 5.29933 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon3" instance=ExtResource( 1 )]
+
+[node name="Cannon1" type="Spatial" parent="ShipBody/GunController"]
+transform = Transform( 0.89361, -0.446579, -0.0450428, 0.447759, 0.893924, 0.020286, 0.0312055, -0.0382961, 0.998779, -1.4277, 0.49201, -2.6906 )
+
+[node name="Base" parent="ShipBody/GunController/Cannon1" instance=ExtResource( 1 )]
+
 [node name="StationController" type="Spatial" parent="."]
-script = ExtResource( 3 )
+transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CameraOrbit" type="Spatial" parent="StationController"]
 
@@ -45,64 +105,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.5598 )
 [node name="RayCast" type="RayCast" parent="StationController/CameraOrbit/CameraNod/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0376825, -0.855051 )
 cast_to = Vector3( 0, 0, -100 )
-
-[node name="ShipBody" type="MeshInstance" parent="."]
-transform = Transform( 1, -2.38419e-07, 0, 2.38419e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 2 )
-skeleton = NodePath("")
-material/0 = null
-script = ExtResource( 5 )
-
-[node name="RightCollision" type="CollisionShape" parent="."]
-shape = SubResource( 3 )
-
-[node name="MiddleCollision" type="CollisionShape" parent="."]
-shape = SubResource( 4 )
-
-[node name="LeftCollision" type="CollisionShape" parent="."]
-shape = SubResource( 5 )
-
-[node name="GunController" type="Spatial" parent="."]
-script = ExtResource( 2 )
-
-[node name="Cannon8" type="Spatial" parent="GunController"]
-transform = Transform( -0.89395, 0.447813, 0.0178096, -0.448071, -0.893874, -0.0148961, 0.00924885, -0.0212963, 0.99973, 1.0231, -0.703036, 5.30369 )
-
-[node name="Base" parent="GunController/Cannon8" instance=ExtResource( 1 )]
-
-[node name="Cannon7" type="Spatial" parent="GunController"]
-transform = Transform( -0.894294, -0.447126, -0.0177981, 0.447385, -0.894218, -0.0149018, -0.00925241, -0.0212892, 0.999731, -1.02301, -0.703081, 5.30369 )
-
-[node name="Base" parent="GunController/Cannon7" instance=ExtResource( 1 )]
-
-[node name="Cannon6" type="Spatial" parent="GunController"]
-transform = Transform( -0.89395, 0.447813, 0.0178096, -0.448071, -0.893874, -0.0148961, 0.00924885, -0.0212963, 0.99973, 0.880628, -0.583867, -2.69415 )
-
-[node name="Base" parent="GunController/Cannon6" instance=ExtResource( 1 )]
-
-[node name="Cannon5" type="Spatial" parent="GunController"]
-transform = Transform( -0.894294, -0.447126, -0.0177981, 0.447385, -0.894218, -0.0149018, -0.00925241, -0.0212892, 0.999731, -0.880628, -0.583867, -2.69415 )
-
-[node name="Base" parent="GunController/Cannon5" instance=ExtResource( 1 )]
-
-[node name="Cannon4" type="Spatial" parent="GunController"]
-transform = Transform( 0.893362, 0.446903, 0.0467179, -0.448254, 0.893595, 0.0236069, -0.0311969, -0.0420309, 0.998629, 1.79459, 0.670486, 5.29933 )
-
-[node name="Base" parent="GunController/Cannon4" instance=ExtResource( 1 )]
-
-[node name="Cannon2" type="Spatial" parent="GunController"]
-transform = Transform( 0.893361, 0.447077, 0.0450365, -0.448255, 0.893676, 0.0202452, -0.0311969, -0.0382742, 0.99878, 1.42074, 0.481455, -2.6902 )
-
-[node name="Base" parent="GunController/Cannon2" instance=ExtResource( 1 )]
-
-[node name="Cannon3" type="Spatial" parent="GunController"]
-transform = Transform( 0.89361, -0.446405, -0.046737, 0.447759, 0.893841, 0.0236778, 0.0312055, -0.0420857, 0.998627, -1.7968, 0.671788, 5.29933 )
-
-[node name="Base" parent="GunController/Cannon3" instance=ExtResource( 1 )]
-
-[node name="Cannon1" type="Spatial" parent="GunController"]
-transform = Transform( 0.89361, -0.446579, -0.0450428, 0.447759, 0.893924, 0.020286, 0.0312055, -0.0382961, 0.998779, -1.4277, 0.49201, -2.6906 )
-
-[node name="Base" parent="GunController/Cannon1" instance=ExtResource( 1 )]
 
 [connection signal="tree_entered" from="StationController" to="." method="_on_StationController_tree_entered"]
