@@ -49,6 +49,9 @@ shape = SubResource( 4 )
 [node name="LeftCollision" type="CollisionShape" parent="ShipBody"]
 shape = SubResource( 5 )
 
+[node name="ShipDirection" type="RayCast" parent="ShipBody"]
+transform = Transform( 1, -4.76837e-07, -4.76837e-07, -4.76837e-07, -4.37112e-08, -1, 4.76837e-07, 1, -4.37114e-08, 0, 0, 0 )
+
 [node name="GunController" type="Spatial" parent="ShipBody"]
 script = ExtResource( 2 )
 
