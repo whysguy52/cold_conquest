@@ -1,4 +1,4 @@
-extends "res://scenes/Ships/ShipCoreScripts/BaseController.gd"
+extends MeshInstance
 
 
 # Declare member variables here. Examples:
@@ -8,10 +8,7 @@ extends "res://scenes/Ships/ShipCoreScripts/BaseController.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    print_debug("pilot script loaded successfully")
-
-func _physics_process(_delta):
-    pass
+    pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
