@@ -14,13 +14,15 @@ func _ready():
 func _physics_process(delta):
     #somehow weight always stops at 1.0 exactly. I don't get it but it's what i want
     if isRotating == true and weight <1:
-        weight += delta * rotationSpeed
         turnShip()
+        weight += delta * rotationSpeed
     else:
         isRotating = false
 
 
 func set_new_angle(camAngle:Basis):
+    #add some changes to control when and how to rotate
+    #also, make sure rotations are limited.
     weight = 0.0
     isRotating = true
     targetAngle = camAngle
