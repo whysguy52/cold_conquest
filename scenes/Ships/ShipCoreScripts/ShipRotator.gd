@@ -2,7 +2,7 @@ extends KinematicBody
 
 
 var weight = 1.0
-var rotationSpeed = 0.05
+var rotationSpeed = 0.5
 var isRotating:bool
 var startAngle:Basis
 var targetAngle:Basis
@@ -12,14 +12,13 @@ func _ready():
     targetAngle = global_transform.basis
 
 func _physics_process(delta):
+    #somehow weight always stops at 1.0 exactly. I don't get it but it's what i want
     if isRotating == true and weight <1:
-        weight += delta
+        weight += delta * rotationSpeed
         turnShip()
     else:
         isRotating = false
-        weight = 1
-        transform.basis = startAngle.slerp(targetAngle,1).orthonormalized()
-    print_debug(isRotating)
+    print_debug(weight)
 
 
 func set_new_angle(camAngle:Basis):
