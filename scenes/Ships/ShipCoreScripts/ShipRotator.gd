@@ -1,31 +1,30 @@
 extends KinematicBody
 
 
-var weight = 0.0
+#var weight = 1.0
 var rotationSpeed = 0.05
-var isRotating
-var targetAngle
+var isRotating:bool
+var targetAngle:Basis
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    targetAngle = global_transform.basis
 
 func _physics_process(delta):
-    if isRotating == true and weight <= 1:
-        print_debug(weight)
-        turnShip()
-        weight += (delta * rotationSpeed)
+    #works but not as intended
+    if targetAngle.is_equal_approx(transform.basis):
+        transform.basis = transform.basis.slerp(targetAngle,1).orthonormalized()
+        print_debug("Rotation Complete")
     else:
-        isRotating = false
-        weight = 0.0
-        
+        transform.basis = transform.basis.slerp(targetAngle, rotationSpeed).orthonormalized()
+
 
 func set_new_angle(camAngle:Basis):
     isRotating = true
     targetAngle = camAngle
 
 func turnShip():
-    transform.basis = transform.basis.slerp(targetAngle.orthonormalized(), rotationSpeed)
+    transform.basis = transform.basis.slerp(targetAngle, rotationSpeed).orthonormalized()
 
 
 

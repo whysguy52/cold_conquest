@@ -15,7 +15,7 @@ func _ready():
 func _physics_process(_delta):
     if Input.is_action_pressed("RMB"):
         cameraRotVect = $CameraOrbit/CameraNod.global_transform.basis
-        shipRotator.set_new_angle(cameraRotVect)
+        shipRotator.set_new_angle(cameraRotVect.orthonormalized())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
