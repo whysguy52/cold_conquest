@@ -2,7 +2,7 @@ extends KinematicBody
 
 
 var weight = 0.0
-var rotationSpeed = 0.5
+var rotationSpeed = 0.05
 var isRotating
 var targetAngle
 
@@ -12,20 +12,21 @@ func _ready():
 
 func _physics_process(delta):
     if isRotating == true and weight <= 1:
-        turnShip(targetAngle)
-        delta = delta / 2
-        weight += delta
+        print_debug(weight)
+        turnShip()
+        weight += (delta * rotationSpeed)
     else:
         isRotating = false
         weight = 0.0
+        
 
 func set_new_angle(camAngle:Basis):
     isRotating = true
     targetAngle = camAngle
 
+func turnShip():
+    transform.basis = transform.basis.slerp(targetAngle.orthonormalized(), rotationSpeed)
 
-func turnShip(camAngle:Basis):
-    transform.basis = transform.basis.slerp(camAngle.orthonormalized(), weight)
 
 
 
