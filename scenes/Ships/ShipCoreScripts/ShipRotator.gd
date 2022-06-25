@@ -10,11 +10,10 @@ var targetAngle:Basis
 func _ready():
     targetAngle = global_transform.basis
 
-func _physics_process(delta):
+func _physics_process(_delta):
     #works but not as intended
     if targetAngle.is_equal_approx(transform.basis):
         transform.basis = transform.basis.slerp(targetAngle,1).orthonormalized()
-        print_debug("Rotation Complete")
     else:
         transform.basis = transform.basis.slerp(targetAngle, rotationSpeed).orthonormalized()
 
