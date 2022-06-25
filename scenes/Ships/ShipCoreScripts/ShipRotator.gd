@@ -18,7 +18,6 @@ func _physics_process(delta):
         turnShip()
     else:
         isRotating = false
-    print_debug(weight)
 
 
 func set_new_angle(camAngle:Basis):

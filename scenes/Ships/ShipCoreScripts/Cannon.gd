@@ -1,6 +1,5 @@
 extends Spatial
 
-
 var PivotPoint
 var targetRot:Basis
 var updatedRot:Basis
