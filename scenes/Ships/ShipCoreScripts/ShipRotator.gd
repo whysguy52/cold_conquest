@@ -7,6 +7,7 @@ var isRotating:bool
 var startAngle:Basis
 var targetAngle:Basis
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     targetAngle = global_transform.basis
@@ -30,8 +31,6 @@ func set_new_angle(camAngle:Basis):
 
 func turnShip():
     transform.basis = startAngle.slerp(targetAngle, weight).orthonormalized()
-
-
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

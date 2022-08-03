@@ -30,11 +30,25 @@ points = PoolVector3Array( -2.05302, -0.59339, -9.58448, -1.57955, 0.945368, 10.
 [node name="Diamond_Back" type="Spatial"]
 script = ExtResource( 4 )
 
+[node name="StationController" type="Spatial" parent="."]
+transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="CameraOrbit" type="Spatial" parent="StationController"]
+
+[node name="CameraNod" type="Spatial" parent="StationController/CameraOrbit"]
+
+[node name="Camera" type="Camera" parent="StationController/CameraOrbit/CameraNod"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.5598 )
+
+[node name="RayCast" type="RayCast" parent="StationController/CameraOrbit/CameraNod/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0376825, -0.855051 )
+cast_to = Vector3( 0, 0, -100 )
+
 [node name="ShipBody" type="KinematicBody" parent="."]
 transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 5 )
 
-[node name="ShipBody" type="MeshInstance" parent="ShipBody"]
+[node name="ShipBodyMesh" type="MeshInstance" parent="ShipBody"]
 transform = Transform( 1, -2.38419e-07, 0, 2.38419e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 2 )
 skeleton = NodePath("")
@@ -94,19 +108,5 @@ transform = Transform( 0.89361, -0.446405, -0.046737, 0.447759, 0.893841, 0.0236
 transform = Transform( 0.89361, -0.446579, -0.0450428, 0.447759, 0.893924, 0.020286, 0.0312055, -0.0382961, 0.998779, -1.4277, 0.49201, -2.6906 )
 
 [node name="Base" parent="ShipBody/GunController/Cannon1" instance=ExtResource( 1 )]
-
-[node name="StationController" type="Spatial" parent="."]
-transform = Transform( 1, -4.76837e-07, 0, 4.76837e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
-
-[node name="CameraOrbit" type="Spatial" parent="StationController"]
-
-[node name="CameraNod" type="Spatial" parent="StationController/CameraOrbit"]
-
-[node name="Camera" type="Camera" parent="StationController/CameraOrbit/CameraNod"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.5598 )
-
-[node name="RayCast" type="RayCast" parent="StationController/CameraOrbit/CameraNod/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0376825, -0.855051 )
-cast_to = Vector3( 0, 0, -100 )
 
 [connection signal="tree_entered" from="StationController" to="." method="_on_StationController_tree_entered"]

@@ -7,6 +7,7 @@ var gunController
 # Called when the node enters the scene tree for the first time.
 func _ready():
     gunController = get_parent().get_node("ShipBody/GunController")
+    cameraRotVect = $CameraOrbit/CameraNod.global_transform.basis
 
 func _physics_process(_delta):
     if Input.is_action_pressed("RMB"):

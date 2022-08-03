@@ -2,16 +2,16 @@ extends Spatial
 
 
 var Cannons
-
+var ShipBody
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    ShipBody = get_parent()
     Cannons = get_children()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
     pass
-
 
 func set_new_angle(camAngle:Basis):
     #rotate the axis by the cannons z axis angle and send it.

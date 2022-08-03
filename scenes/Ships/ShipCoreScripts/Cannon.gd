@@ -15,10 +15,14 @@ func _process(_delta):
     pass
 
 func _physics_process(delta):
+    
+    #check if current rotation target is different from latest RMB
     if updatedRot.z != targetRot.z:
+        #if updateRot and targetRot are different, new rotation, reset weight
+        #do not set weight to 0 or rotation will halt if RMB is held
         weight = delta
         targetRot = updatedRot
-        
+    
     if weight <= 1.0:
         turnTurrets(delta)
         rpc("move_cannon_to",global_transform.basis,PivotPoint.global_transform.basis)
