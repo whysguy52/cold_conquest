@@ -15,8 +15,9 @@ func _ready():
 func _physics_process(delta):
     #somehow weight always stops at 1.0 exactly. I don't get it but it's what i want
     if isRotating == true and weight <1:
-        turnShip()
         weight += delta * rotationSpeed
+        turnShip()
+        print_debug(weight)
     else:
         isRotating = false
 
