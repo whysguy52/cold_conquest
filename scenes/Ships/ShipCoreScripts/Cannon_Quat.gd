@@ -1,10 +1,10 @@
 extends Spatial
 
 var PivotPoint
-var targetRot:Basis
-var updatedRot:Basis
-var currentBaseRot:Basis
-var currentPivotRot:Basis
+var targetRot:Quat
+var updatedRot:Quat
+var currentBaseRot:Quat
+var currentPivotRot:Quat
 var weight = 0.0
 
 # Called when the node enters the scene tree for the first time.
@@ -27,7 +27,7 @@ func _physics_process(delta):
         turnTurrets(delta)
         rpc("move_cannon_to",global_transform.basis,PivotPoint.global_transform.basis)
 
-func set_new_angle(camAngle:Basis):
+func set_new_angle(camAngle:Quat):
 #this will prevent the turrets from moving super fast when the angle doesn't change.
 #I believe it has something to do with the weight getting stuck at something small
 #and the new slerp start point "0" gets pulled up quickly
@@ -44,20 +44,19 @@ func turnTurrets(delta):
 
 func turnBase():
     #calculate weighted slerp for base and store it
-    var nextBaseRot = currentBaseRot.slerp(targetRot.orthonormalized(),weight)
+    var nextBaseRot = currentBaseRot.slerp(targetRot.normalized(),weight)
     
-    #assign the next weighted basis to current basis
+    #assign the next weighted quat to current basis
     global_transform.basis = Basis(nextBaseRot)
-    
     #lock base rotation to only y.
     self.rotation_degrees.x = 0
     self.rotation_degrees.z = 0
 
 func turnPivot():
     
-    var nextPivotRot = currentPivotRot.slerp(targetRot.orthonormalized(),weight)
+    var nextPivotRot = currentPivotRot.slerp(targetRot.normalized(),weight)
     
-    PivotPoint.global_transform.basis = nextPivotRot
+    PivotPoint.global_transform.basis = Basis(nextPivotRot)
     
     #lock pivot rotation to only x
     PivotPoint.rotation_degrees.z = 0
